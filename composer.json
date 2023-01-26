@@ -1,0 +1,39 @@
+{
+    "name": "indianic/currency-management",
+    "description": "Currency Management Package",
+    "keywords": [],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Subhash",
+            "email": "subhash.kaashyan@indianic.com"
+        }
+    ],
+    "require": {
+       
+    },
+    "autoload": {
+        "psr-4": {
+            "Indianic\\CurrencyManagement\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Indianic\\CurrencyManagement\\CurrencyServiceProvider" 
+            ]
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postInstall",
+            "composer dump-autoload",
+            "php artisan optimize"
+        ],
+        "post-update-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "composer dump-autoload"
+        ]
+    }
+}

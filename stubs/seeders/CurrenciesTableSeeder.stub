@@ -1,0 +1,28 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use App\Models\Currency;
+use App\Providers\DataProviders\CurrencyProvider;
+use App\Providers\DataProviders\StateProvider;
+use App\Providers\DataProviders\CityProvider;
+
+class CurrenciesTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        Currency::insertOrIgnore(CurrencyProvider::data());
+
+        State::insertOrIgnore(StateProvider::data());
+
+        foreach (collect(CityProvider::data())->chunk(15000) as $chunkCities) {
+                City::insertOrIgnore($chunkCities->toArray());
+        }
+    }
+}
