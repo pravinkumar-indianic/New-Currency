@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Currency;
+use Indianic\CurrencyManagement\Models\Currency;
 use App\Providers\DataProviders\CurrencyProvider;
 
 class CurrenciesTableSeeder extends Seeder
