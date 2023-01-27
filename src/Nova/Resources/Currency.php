@@ -21,7 +21,7 @@ class Currency extends Resource
      *
      * @var string
      */
-    public static $model = \App\Models\Currency::class;
+    public static $model = \Indianic\CurrencyManagement\Models\Currency::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -103,7 +103,6 @@ class Currency extends Resource
     public function filters(NovaRequest $request)
     {
         return [
-             new HandleScreeingOption(new static::$model, static::$fieldFilter),
         ];
     }
 

@@ -41,9 +41,9 @@ class CurrencyServiceProvider extends ServiceProvider
 
             tap(new Filesystem(), function ($filesystem) {
 
-                foreach (['Currency'] as $modelName) {
-                    $filesystem->copy(__DIR__ .'/../stubs/Models/' . $modelName . '.stub', app_path('Models/' . $modelName . '.php'));
-                }
+//                foreach (['Currency'] as $modelName) {
+//                    $filesystem->copy(__DIR__ .'/../stubs/Models/' . $modelName . '.stub', app_path('Models/' . $modelName . '.php'));
+//                }
 
                 $filesystem->copy(__DIR__ .'/../stubs/seeders/CurrenciesTableSeeder.stub', database_path('seeders/CurrenciesTableSeeder.php'));
 
