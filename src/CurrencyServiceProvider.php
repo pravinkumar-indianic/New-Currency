@@ -58,8 +58,8 @@ class CurrencyServiceProvider extends ServiceProvider
                 }
             }
 
-            if (is_dir($path . "/Seeders")) {
-                $file_names = glob($path . "/Seeders" . '/*.php');
+            if (is_dir($path . "/seeders")) {
+                $file_names = glob($path . "/seeders" . '/*.php');
                 foreach ($file_names as $filename) {
                     $class = basename($filename, '.php');
                     echo "\033[1;33mSeeding:\033[0m {$class}\n";
