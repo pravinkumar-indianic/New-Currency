@@ -48,7 +48,7 @@ class CurrencyServiceProvider extends ServiceProvider
 
             // });
             $this->loadMigrationsFrom(base_path('vendor/indianic/currency-management-new/Database/migrations'));
-            $path = 'vendor/indianic/currency-management-new/database';
+            $path = 'vendor/indianic/currency-management-new/Database';
             $migrationPath = $path."/migrations";
             if (is_dir($migrationPath)) {
                 foreach (array_diff(scandir($migrationPath, SCANDIR_SORT_NONE), [".",".."]) as $migration) {
@@ -58,8 +58,8 @@ class CurrencyServiceProvider extends ServiceProvider
                 }
             }
 
-            if (is_dir($path . "/seeders")) {
-                $file_names = glob($path . "/seeders" . '/*.php');
+            if (is_dir($path . "/Seeders")) {
+                $file_names = glob($path . "/Seeders" . '/*.php');
                 foreach ($file_names as $filename) {
                     $class = basename($filename, '.php');
                     echo "\033[1;33mSeeding:\033[0m {$class}\n";
