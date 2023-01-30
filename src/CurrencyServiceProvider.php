@@ -4,14 +4,15 @@ namespace Indianic\CurrencyManagement;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\ServiceProvider;
-use Laravel\Nova\Nova;
-use Laravel\Nova\Events\ServingNova;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\ServiceProvider;
 use Indianic\CurrencyManagement\Nova\Resources\Currency;
 use Indianic\CurrencyManagement\Policies\CurrencyManagementPolicy;
+use Laravel\Nova\Events\ServingNova;
+use Laravel\Nova\Nova;
 
 /**
  * Class CurrencyServiceProvider
