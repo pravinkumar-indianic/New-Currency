@@ -35,7 +35,7 @@ class CurrencyManagementCommand extends Command
     public function handle()
     {
         $this->info('Publishing Configuration...');
-        $path = base_path('vendor/indianic/currency-management-new/database')
+        $path = base_path('vendor/indianic/currency-management-new/database');
         $migrationPath = $path."/migrations";
         if (is_dir(base_path($migrationPath))) {
             foreach (array_diff(scandir(base_path($migrationPath), SCANDIR_SORT_NONE), [".",".."]) as $migration) {
