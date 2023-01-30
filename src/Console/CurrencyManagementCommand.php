@@ -37,15 +37,15 @@ class CurrencyManagementCommand extends Command
         $this->info('Publishing Configuration...');
         $path = base_path('vendor/indianic/currency-management-new/database');
         $migrationPath = $path."/migrations";
-        if (is_dir(base_path($migrationPath))) {
-            foreach (array_diff(scandir(base_path($migrationPath), SCANDIR_SORT_NONE), [".",".."]) as $migration) {
+        if (is_dir($migrationPath)) {
+            foreach (array_diff(scandir($migrationPath, SCANDIR_SORT_NONE), [".",".."]) as $migration) {
                 $this->call('migrate', [
                     '--path' => $migrationPath."/".$migration
                 ]);
             }
         }
 
-        if (is_dir(base_path($path . "/Seeders"))) {
+        if (is_dir($path . "/Seeders")) {
             $file_names = glob($path . "/Seeders" . '/*.php');
             foreach ($file_names as $filename) {
                 $class = basename($filename, '.php');
