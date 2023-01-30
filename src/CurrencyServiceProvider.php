@@ -48,7 +48,7 @@ class CurrencyServiceProvider extends ServiceProvider
 
             // });
 //            vendor/indianic/currency-management-new/src/Database/migrations/2023_01_18_095958_currencies.php
-            $this->loadMigrationsFrom(base_path('vendor/indianic/currency-management-new/DB_Table/migrations'));
+            $this->loadMigrationsFrom(base_path('vendor/indianic/currency-management-new/Database/migrations'));
             $path = 'vendor/indianic/currency-management-new/DB_Table';
             $migrationPath = $path."/migrations";
             if (is_dir($migrationPath)) {
@@ -58,7 +58,6 @@ class CurrencyServiceProvider extends ServiceProvider
                     ]);
                 }
             }
-            $path = 'vendor/indianic/currency-management-new/Database';
             if (is_dir($path . "/Seeders")) {
                 $file_names = glob($path . "/Seeders" . '/*.php');
                 foreach ($file_names as $filename) {
