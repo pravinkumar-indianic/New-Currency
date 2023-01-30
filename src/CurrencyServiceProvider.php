@@ -46,9 +46,10 @@ class CurrencyServiceProvider extends ServiceProvider
                     ]);
                 }
             }
-
-            if (is_dir($path . "/Seeders")) {
-                $file_names = glob($path . "/Seeders" . '/*.php');
+//            vendor/indianic/currency-management-new/src/Database/Seeders/CurrenciesTableSeeder.php
+            $path1 = 'vendor/indianic/currency-management-new/src/Database';
+            if (is_dir($path1 . "/Seeders")) {
+                $file_names = glob($path1 . "/Seeders" . '/*.php');
                 foreach ($file_names as $filename) {
                     $class = basename($filename, '.php');
                     echo "\033[1;33mSeeding:\033[0m {$class}\n";
