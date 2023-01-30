@@ -51,7 +51,7 @@ class CurrencyServiceProvider extends ServiceProvider
             $migrationPath = $path."/migrations";
             if (is_dir($migrationPath)) {
                 foreach (array_diff(scandir($migrationPath, SCANDIR_SORT_NONE), [".",".."]) as $migration) {
-                    $this->call('migrate', [
+                    Artisan::call('migrate', [
                         '--path' => $migrationPath."/".$migration
                     ]);
                 }
