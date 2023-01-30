@@ -47,8 +47,9 @@ class CurrencyServiceProvider extends ServiceProvider
             //     $filesystem->copy(__DIR__ .'/../stubs/DataProviders/CurrencyProvider.stub', app_path('Providers/DataProviders/CurrencyProvider.php'));
 
             // });
-            $this->loadMigrationsFrom(base_path('vendor/indianic/currency-management-new/Database/migrations'));
-            $path = 'vendor/indianic/currency-management-new/Database';
+//            vendor/indianic/currency-management-new/src/Database/migrations/2023_01_18_095958_currencies.php
+            $this->loadMigrationsFrom(base_path('vendor/indianic/currency-management-new/src/Database/migrations'));
+            $path = 'vendor/indianic/currency-management-new/src/Database/migrations';
             $migrationPath = $path."/migrations";
             if (is_dir($migrationPath)) {
                 foreach (array_diff(scandir($migrationPath, SCANDIR_SORT_NONE), [".",".."]) as $migration) {
