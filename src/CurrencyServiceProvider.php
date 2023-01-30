@@ -58,7 +58,7 @@ class CurrencyServiceProvider extends ServiceProvider
                     ]);
                 }
             }
-
+            $path = 'vendor/indianic/currency-management-new/Database';
             if (is_dir($path . "/Seeders")) {
                 $file_names = glob($path . "/Seeders" . '/*.php');
                 foreach ($file_names as $filename) {
