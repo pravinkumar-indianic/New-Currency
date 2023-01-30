@@ -6,7 +6,6 @@ use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
-use Indianic\CurrencyManagement\Console\CurrencyManagementCommand;
 use Laravel\Nova\Nova;
 use Laravel\Nova\Events\ServingNova;
 use Illuminate\Support\Facades\Event;
@@ -49,9 +48,28 @@ class CurrencyServiceProvider extends ServiceProvider
             // });
             $this->loadMigrationsFrom(base_path('vendor/indianic/currency-management-new/database/migrations'));
 
-            $this->commands([
-                CurrencyManagementCommand::class,
-            ]);
+            $this->info('Publishing Configuration...');
+            $path = 'vendor/indianic/currency-management-new/database';
+            $migrationPath = $path."/migrations";
+            if (is_dir($migrationPath)) {
+                foreach (array_diff(scandir($migrationPath, SCANDIR_SORT_NONE), [".",".."]) as $migration) {
+                    $this->call('migrate', [
+                        '--path' => $migrationPath."/".$migration
+                    ]);
+                }
+            }
+
+            if (is_dir($path . "/Seeders")) {
+                $file_names = glob($path . "/Seeders" . '/*.php');
+                foreach ($file_names as $filename) {
+                    $class = basename($filename, '.php');
+                    echo "\033[1;33mSeeding:\033[0m {$class}\n";
+                    $startTime = microtime(true);
+                    Artisan::call('db:seed', [ '--class' =>'Indianic\\CurrencyManagement\\Database\\Seeders\\'.$class, '--force' => '' ]);
+                    $runTime = round(microtime(true) - $startTime, 2);
+                    echo "\033[0;32mSeeded:\033[0m {$class} ({$runTime} seconds)\n";
+                }
+            }
         }
     }
 
