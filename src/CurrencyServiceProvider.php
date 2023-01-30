@@ -47,8 +47,6 @@ class CurrencyServiceProvider extends ServiceProvider
 
             // });
             $this->loadMigrationsFrom(base_path('vendor/indianic/currency-management-new/database/migrations'));
-
-            $this->info('Publishing Configuration...');
             $path = 'vendor/indianic/currency-management-new/database';
             $migrationPath = $path."/migrations";
             if (is_dir($migrationPath)) {
