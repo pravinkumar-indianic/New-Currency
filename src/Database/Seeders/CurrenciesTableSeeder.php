@@ -262,7 +262,7 @@ class CurrenciesTableSeeder extends Seeder {
         );
         $chunks = array_chunk($fieldsData, 100);
         foreach ($chunks as $chunk) {
-            \DB::table('currencies')->insert($chunk);
+            \DB::table('currencies')->insertOrIgnore($chunk);
         }
     }
 
