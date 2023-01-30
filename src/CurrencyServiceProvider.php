@@ -26,30 +26,28 @@ class CurrencyServiceProvider extends ServiceProvider
 
     public function boot()
     {
-
 //         $this->setModulePermissions();
 //        Gate::policy(\Indianic\CurrencyManagement\Models\Currency::class, CurrencyManagementPolicy::class);
 
         Nova::serving(function (ServingNova $event) {
-
             Nova::resources([
                 Currency::class,
             ]);
         });
 
         if ($this->app->runningInConsole()) {
+            // tap(new Filesystem(), function ($filesystem) {
 
-            tap(new Filesystem(), function ($filesystem) {
+            //     $filesystem->copy(__DIR__ .'/../stubs/seeders/CurrenciesTableSeeder.stub', database_path('seeders/CurrenciesTableSeeder.php'));
 
-                $filesystem->copy(__DIR__ .'/../stubs/seeders/CurrenciesTableSeeder.stub', database_path('seeders/CurrenciesTableSeeder.php'));
+            //     $filesystem->copy(__DIR__ .'/../stubs/migrations/2023_01_18_095958_currencies.stub', database_path('migrations/2023_01_18_095958_currencies.php'));
 
-                $filesystem->copy(__DIR__ .'/../stubs/migrations/2023_01_18_095958_currencies.stub', database_path('migrations/2023_01_18_095958_currencies.php'));
+            //     File::isDirectory(app_path('Providers/DataProviders')) or File::makeDirectory(app_path('Providers/DataProviders'), 0777, true, true);
 
-                File::isDirectory(app_path('Providers/DataProviders')) or File::makeDirectory(app_path('Providers/DataProviders'), 0777, true, true);
+            //     $filesystem->copy(__DIR__ .'/../stubs/DataProviders/CurrencyProvider.stub', app_path('Providers/DataProviders/CurrencyProvider.php'));
 
-                $filesystem->copy(__DIR__ .'/../stubs/DataProviders/CurrencyProvider.stub', app_path('Providers/DataProviders/CurrencyProvider.php'));
-
-            });
+            // });
+            $this->loadMigrationsFrom(base_path('vendor/indianic/currency-management-new/database/migrations'));
 
             $this->commands([
                 CurrencyManagementCommand::class,
@@ -70,7 +68,8 @@ class CurrencyServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    private function setModulePermissions() {
+    private function setModulePermissions()
+    {
         $existingPermissions = config('nova-permissions.permissions');
 
         $existingPermissions['view currency-management'] = [
