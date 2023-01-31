@@ -3,10 +3,8 @@
 namespace Indianic\CurrencyManagement;
 
 use Laravel\Nova\Nova;
-use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Events\ServingNova;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\ServiceProvider;
 use Indianic\CurrencyManagement\Nova\Resources\Currency;
@@ -19,8 +17,6 @@ use Indianic\CurrencyManagement\Policies\CurrencyManagementPolicy;
  */
 class CurrencyServiceProvider extends ServiceProvider
 {
-    /** @var Command */
-    protected $command;
 
     public function boot()
     {
