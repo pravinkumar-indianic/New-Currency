@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-       
+         "trin4ik/nova-switcher": "^0.3.0"       
     },
     "autoload": {
         "psr-4": {
