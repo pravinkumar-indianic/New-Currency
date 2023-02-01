@@ -5,6 +5,7 @@ namespace Indianic\CurrencyManagement;
 use Laravel\Nova\Nova;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Nova\Events\ServingNova;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\ServiceProvider;
 use Indianic\CurrencyManagement\Nova\Resources\Currency;
@@ -15,11 +16,9 @@ use Indianic\CurrencyManagement\Policies\CurrencyManagementPolicy;
  *
  * @package Indianic\CurrencyManagement
  */
-class CurrencyServiceProvider extends ServiceProvider
-{
+class CurrencyServiceProvider extends ServiceProvider {
 
-    public function boot()
-    {
+    public function boot() {
 //         $this->setModulePermissions();
 //        Gate::policy(\Indianic\CurrencyManagement\Models\Currency::class, CurrencyManagementPolicy::class);
 
@@ -29,48 +28,38 @@ class CurrencyServiceProvider extends ServiceProvider
             ]);
         });
 
-        if ($this->app->runningInConsole()) {
-            $this->loadMigrationsFrom(base_path('vendor/indianic/currency-management-new/src/Database/migrations'));
-            $path = 'vendor/indianic/currency-management-new/src/Database';
-            $migrationPath = $path."/migrations";
-            if (is_dir($migrationPath)) {
-                foreach (array_diff(scandir($migrationPath, SCANDIR_SORT_NONE), [".",".."]) as $migration) {
-                    Artisan::call('migrate', [
-                        '--path' => $migrationPath."/".$migration
-                    ]);
-                }
-            }
-   
-            if (is_dir($path. "/Seeders")) {
-                $file_names = glob($path . "/Seeders" . '/*.php');
-                foreach ($file_names as $filename) {
-                    $class = basename($filename, '.php');
-                    echo "\033[1;33mSeeding:\033[0m {$class}\n";
-                    $startTime = microtime(true);
-                    Artisan::call('db:seed', [ '--class' =>'Indianic\\CurrencyManagement\\Database\\Seeders\\'.$class, '--force' => '' ]);
-                    $runTime = round(microtime(true) - $startTime, 2);
-                    echo "\033[0;32mSeeded:\033[0m {$class} ({$runTime} seconds)\n";
+        if (!Schema::hasTable('currencies')) {
+            if ($this->app->runningInConsole()) {
+                $this->loadMigrationsFrom(base_path('vendor/indianic/currency-management-new/src/Database/migrations'));
+                $path = 'vendor/indianic/currency-management-new/src/Database';
+                $migrationPath = $path . "/migrations";
+                if (is_dir($migrationPath)) {
+                    foreach (array_diff(scandir($migrationPath, SCANDIR_SORT_NONE), [".", ".."]) as $migration) {
+                        Artisan::call('migrate', [
+                            '--path' => $migrationPath . "/" . $migration
+                        ]);
+                    }
                 }
             }
         }
+
+
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
     }
 
     /**
      * Register the application services.
      */
-    public function register()
-    {
+    public function register() {
         //
     }
 
-        /**
+    /**
      * Set Currency Managements module permissions
      *
      * @return void
      */
-    private function setModulePermissions()
-    {
+    private function setModulePermissions() {
         $existingPermissions = config('nova-permissions.permissions');
 
         $existingPermissions['view currency-management'] = [
@@ -99,4 +88,5 @@ class CurrencyServiceProvider extends ServiceProvider
 
         \Config::set('nova-permissions.permissions', $existingPermissions);
     }
+
 }
