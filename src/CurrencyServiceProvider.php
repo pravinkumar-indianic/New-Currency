@@ -19,8 +19,8 @@ use Indianic\CurrencyManagement\Policies\CurrencyManagementPolicy;
 class CurrencyServiceProvider extends ServiceProvider {
 
     public function boot() {
-//         $this->setModulePermissions();
-//        Gate::policy(\Indianic\CurrencyManagement\Models\Currency::class, CurrencyManagementPolicy::class);
+        $this->setModulePermissions();
+       Gate::policy(\Indianic\CurrencyManagement\Models\Currency::class, CurrencyManagementPolicy::class);
 
         Nova::serving(function (ServingNova $event) {
             Nova::resources([
@@ -68,11 +68,11 @@ class CurrencyServiceProvider extends ServiceProvider {
             'group' => 'Currency Management'
         ];
 
-        // $existingPermissions['create currency-management'] = [
-        //     'display_name' => 'Create currency management',
-        //     'description'  => 'Can create currency management',
-        //     'group'        => 'Currency Management'
-        // ];
+        $existingPermissions['create currency-management'] = [
+            'display_name' => 'Create currency management',
+            'description'  => 'Can create currency management',
+            'group'        => 'Currency Management'
+        ];
 
         $existingPermissions['update currency-management'] = [
             'display_name' => 'Update currency management',
@@ -80,11 +80,11 @@ class CurrencyServiceProvider extends ServiceProvider {
             'group' => 'Currency Management'
         ];
 
-        // $existingPermissions['delete currency-management'] = [
-        //     'display_name' => 'Delete currency management',
-        //     'description'  => 'Can delete currency management',
-        //     'group'        => 'Currency Management'
-        // ];
+        $existingPermissions['delete currency-management'] = [
+            'display_name' => 'Delete currency management',
+            'description'  => 'Can delete currency management',
+            'group'        => 'Currency Management'
+        ];
 
         \Config::set('nova-permissions.permissions', $existingPermissions);
     }
